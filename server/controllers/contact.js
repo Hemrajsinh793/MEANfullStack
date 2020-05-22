@@ -1,6 +1,7 @@
 let express = require('express');
 let router = express.Router();
 let mongoose=require('mongoose');
+let jwt=require('jsonwebtoken');
 
 //create a reference to db schema
 let contactModel=require("../models/contact");
@@ -13,24 +14,17 @@ module.exports.displayContactList = (req, res, next)=>{
         }
         else
         {
-          //  console.log(contactList);
-        res.render('contacts/index',{
-            title:'Contact List',
-            contactList:contactList,
-            displayName: req.user ? req.user.displayName : ""
-
-        }); 
+            res.json({success:true, msg:'contact List Displayed successfully', contactList: contactList, user:req.user});
         }
-    });
-}
+    }); 
+        }
+    
+
 
 module.exports.displayAddPage=(req, res, next)=>{
-    res.render('contacts/add',{
-        title:'Add New Contact',
-        displayName: req.user ? req.user.displayName : ""
+    res.json({success:true, msg:'successfully display add page'});
+    };
 
-    });
-}
 
 module.exports.processAddPage=(req, res, next)=>{
 
@@ -49,7 +43,7 @@ module.exports.processAddPage=(req, res, next)=>{
         else
         {
             //refresh contact list and redirect to the page
-            res.redirect('/contact-list');
+            res.json({success: true, msg:'Succesfully added new contact'});
         }
     });
 }
@@ -66,12 +60,7 @@ module.exports.displayEditPage= (req, res, next)=>{
         else
         {
             // show edit view
-            res.render('contacts/edit',{
-                title:'Edit Contact',
-                contact:contactObject,
-                displayName: req.user ? req.user.displayName : ""
-
-            });
+            res.json({success:true, msg:'Successfully display edit page', contact:contactObject});
         }
     });
 
@@ -94,7 +83,7 @@ module.exports.processEditPage=(req, res, next)=>{
         }
         else
         {
-            res.redirect('/contact-list');
+            res.json({success:true, msg:'successfully Edited Contact', contact:updatedContact});
         }
     })
 }
@@ -108,7 +97,7 @@ module.exports.performDelete=(req, res, next)=>{
         }
         else
         {
-            res.redirect('/contact-list')
+            res.json({success:true, msg: 'Successfully Deleted contact'});
         }
     })
 }
