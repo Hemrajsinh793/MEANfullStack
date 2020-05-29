@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Contact } from '../models/contact';
+import { User } from '../models/user';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import { Contact } from '../models/contact';
 })
 export class ContactListService {
 
-  private endpoint = 'http://localhost:3000/api/contact-list';
+  private endpoint = 'http://localhost:3000/api/contact-list/';
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -21,8 +22,25 @@ export class ContactListService {
   };
 
   constructor(private http: HttpClient) { }
+  private user: User;
 
   public getList(): Observable<any> {
     return this.http.get<any>(this.endpoint, this.httpOptions);
+  }
+
+  public getContact(contact: Contact): Observable<any>{
+    return this.http.get<any>(this.endpoint + 'edit/' + contact._id, this.httpOptions);
+  }
+
+  public addContact(contact: Contact): Observable<any>{
+    return this.http.post<any>(this.endpoint + 'add', contact, this.httpOptions);
+  }
+
+  public editContact(contact: Contact): Observable<any>{
+    return this.http.post<any>(this.endpoint + 'edit/' + contact._id, contact, this.httpOptions);
+  }
+
+  public deleteContact(contact: Contact): Observable<any>{
+    return this.http.get<any>(this.endpoint + 'delete/' + contact._id, this.httpOptions);
   }
 }
