@@ -3,41 +3,41 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
-       
+
             <li class="nav-item"></li>
           <a class="nav-link" routerLink="/home"><i class="fa fa-2x fa-home"></i>Home</a>
 
-      
+
               <li class="nav-item"></li>
-        
+
             <a class="nav-link" routerLink="/about"><i class="fa fa-2x fa-info"></i>About</a>
 
-       
+
               <li class="nav-item"></li>
             <a class="nav-link" routerLink="/products"><i class="fa fa-2x fa-briefcase"></i>Products</a>
 
-         
+
               <li class="nav-item"></li>
             <a class="nav-link" routerLink="/services"><i class="fa fa-2x fa-bullseye"></i>Services</a>
 
-         
+
               <li class="nav-item"></li>
             <a class="nav-link" routerLink="/contact"><i class="fa fa-2x fa-phone"></i>Contact</a>
-<!--
-        <% if(typeof displayName== 'string' && displayName){ %>
-          <li class="navbar-text"><i class="fa fa-2x fa-user"></i>
-          Welcome, <%= displayName%></li>
-          -->
-          <li class="nav-item"><a routerLink="/logout" class="nav-link">
+
+
+          <li *ngIf="isLoggedIn()" class="navbar-text text-success ml-5 mr-5 d-done d-lg-inline"><i class="fa fa-2x fa-user"></i>
+          Welcome, {{ user.displayName }}</li>
+
+          <li *ngIf="isLoggedIn()" class="nav-item"><a (click)="onLogoutClick()" routerLink="/logout" class="nav-link">
            <i class="fas fa-2x fa-sign-out-alt"></i>Logout</a></li>
 
-          
-            <li class="nav-item"><a routerLink="/login" class="nav-link">
+
+            <li *ngIf="!isLoggedIn()" class="nav-item"><a routerLink="/login" class="nav-link">
               <i class="fas fa-2x fa-sign-in-alt"></i>Login</a></li>
-                
+
 
       </ul>
     </div>
