@@ -40,7 +40,7 @@ export class ContactDetailsComponent implements OnInit {
     });
   }
 
-  public onDetailsPageSubmit(): void{
+   onDetailsPageSubmit(): void{
     switch (this.title){
       case 'Add Contact':
       this.contactListServices.addContact(this.contact).subscribe(data => {
