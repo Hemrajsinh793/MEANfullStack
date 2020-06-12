@@ -20,7 +20,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(){
     this.user = new User();
-    this.user = JSON.parse(localStorage.getItem('user'));
   }
 
   onLogoutClick(): void{
@@ -31,7 +30,11 @@ export class HeaderComponent implements OnInit {
   }
 
   isLoggedIn(): boolean{
-    return this.authService.loggedIn();
+    const result = this.authService.loggedIn();
+    if (result){
+      this.user = JSON.parse(localStorage.getItem('user'));
+    }
+    return result;
   }
 
 }
