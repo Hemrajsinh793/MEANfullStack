@@ -96,7 +96,7 @@ let strategy=new JWTStrategy(jwtOptions, (jwt_payload,done)=>{
 passport.use(strategy);
 
 app.use('/api', indexRouter);
-app.use('/api/contact-list', contactRouter); //TODO protect this section
+app.use('/api/contact-list',passport.authenticate('jwt', {session: false}), contactRouter); //protect this section with passport
 
 //need to captured incorrected or random links or url
 app.use('*', (req,res)=>{

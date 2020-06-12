@@ -16,19 +16,19 @@ function requireAuth(req,res,next){
 
 
 /*GET contact list page- READ operation */
-router.get('/', contactController.displayContactList);
+router.get('/',passport.authenticate('jwt', {session: false}), contactController.displayContactList);
 
 //GET route for Add page adn will display add page
-router.get('/add', contactController.displayAddPage);
+router.get('/add',passport.authenticate('jwt', {session: false}), contactController.displayAddPage);
 
 //POST routes for Add Contact
-router.post('/add', contactController.processAddPage);
+router.post('/add',passport.authenticate('jwt', {session: false}), contactController.processAddPage);
 
 //Get request for edit contact
-router.get('/edit/:id', contactController.displayEditPage);
+router.get('/edit/:id',passport.authenticate('jwt', {session: false}), contactController.displayEditPage);
 //post request for edit method
-router.post('/edit/:id',contactController.processEditPage);
+router.post('/edit/:id',passport.authenticate('jwt', {session: false}), contactController.processEditPage);
 //Get method for delete request
-router.get('/delete/:id',contactController.performDelete);
+router.get('/delete/:id',passport.authenticate('jwt', {session: false}), contactController.performDelete);
 
 module.exports = router;
